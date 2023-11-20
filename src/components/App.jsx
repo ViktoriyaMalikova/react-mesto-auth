@@ -9,13 +9,12 @@ import DeleteCardPopup from './DeleteCardPopup';
 import ImagePopup from './ImagePopup';
 import { api } from "../utils/api.js";
 import AddPlacePopup from './AddPlacePopup';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute.jsx';
 import Login from './Login.jsx';
 import Register from './Register.jsx';
 import InfoTooltip from './InfoTooltip.jsx';
 import * as mestoAuth from "../utils/mestoAuth.js";
-import { useNavigate } from "react-router-dom";
 
 function App() {
 
@@ -84,8 +83,24 @@ function App() {
         })
         .catch(error => console.log(`Ошибка ${error}`))
     }
-
   }, [loggedIn])
+
+  React.useEffect(() => {
+    if (localStorage.getItem('token')) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        mestoAuth.getContent(token)
+          .then(({ data }) => {
+            if ({ data }) {
+              setLoggedIn(true);
+              setEmail(data.email);
+              navigate('/', { replace: true })
+            }
+          })
+          .catch(error => console.log(`Ошибка ${error}`));
+      }
+    }
+  }, [navigate])
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
@@ -158,21 +173,6 @@ function App() {
         () => { setIsLoading(false) }
       )
   }
-
-  React.useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      mestoAuth.getContent(token)
-        .then(({ data }) => {
-          if ({ data }) {
-            setLoggedIn(true);
-            setEmail(data.email);
-            navigate('/', { replace: true })
-          }
-        })
-        .catch(error => console.log(`Ошибка ${error}`));
-    }
-  }, [navigate])
 
   function handleRegister({ email, password }) {
     mestoAuth.register(email, password)

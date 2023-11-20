@@ -1,7 +1,6 @@
 import React from 'react';
 import AuthnWithForm from './AuthnWithForm';
 
-
 function Register({ onRegister }) {
 
     const [email, setEmail] = React.useState("");

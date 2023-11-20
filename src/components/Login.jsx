@@ -47,7 +47,6 @@ function Login({ onLogin }) {
                 onChange={handleChangePassword}
             />
         </AuthnWithForm>
-
     )
 }
 

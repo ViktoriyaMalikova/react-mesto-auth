@@ -30,7 +30,6 @@ function InfoTooltip({ isOpen, onClose, isRegister }) {
                         src={failedRegister} />
                     <h2 className="popup__tooltip-title ">
                         Что-то пошло не так! Попробуйте ещё раз!
-
                     </h2>
                 </>)
             }

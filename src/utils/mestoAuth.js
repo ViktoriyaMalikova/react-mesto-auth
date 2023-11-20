@@ -14,7 +14,6 @@ export const register = (email, password) => {
         .then((res) => {
             return res;
         })
-        .catch((error) => console.log(error));
 };
 
 
@@ -35,7 +34,6 @@ export const authorize = (email, password) => {
                 return;
             }
         })
-        .catch(error => console.log(error))
 };
 
 export const getContent = (token) => {

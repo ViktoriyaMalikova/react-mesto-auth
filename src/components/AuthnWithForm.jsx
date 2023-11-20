@@ -23,7 +23,6 @@ function AuthnWithForm({ children, title, btnTitle, name, onSubmit }) {
                     {name === "signup" && <p className="authorization__text-btn">
                         Уже зарегистрированы?
                         <Link to="/sign-in" className="authorization__link">
-
                             Войти
                         </Link>
                     </p>}
