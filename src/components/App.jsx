@@ -184,9 +184,6 @@ function App() {
           setTimeout(() => {
             setIsInfoTooltipPopupOpen(false)
           }, 3000)
-        } else {
-          setIsRegister(false);
-          handleInfoTooltipPopupClick();
         }
       })
       .catch((error) => {
@@ -200,6 +197,7 @@ function App() {
     mestoAuth.authorize(email, password)
       .then((data) => {
         if (data.token) {
+          localStorage.setItem('token', data.token);
           setEmail(email);
           setLoggedIn(true);
           navigate('/', { replace: true })
